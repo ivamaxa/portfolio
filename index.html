@@ -8,27 +8,19 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%AC%3C/text%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500;0,9..144,600&family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #17161B;
-    --surface: #201F26;
-    --surface-2: #2B2A33;
-    --ink: #F3EFEA;
-    --ink-soft: #948F9B;
-    --accent: #953B51;
-    --accent-ink: #EDE4D8;
-    --line: #38363F;
-
-    --paper: #EDE4D8;
-    --paper-surface: #E1D5C3;
-    --paper-surface-2: #D3C3AC;
-    --paper-ink: #241B16;
-    --paper-ink-soft: #6C5F53;
-    --paper-line: #C9BBA5;
+    --bg: #E7E9EC;
+    --surface: #D9DCE0;
+    --surface-2: #C9CDD3;
+    --ink: #191C21;
+    --ink-soft: #5B6068;
+    --accent: #B08159;
+    --accent-ink: #191C21;
+    --line: #BEC3C9;
 
     --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-    --font-impact: "Anton", "Archivo Black", Impact, sans-serif;
     --font-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
     --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
 
@@ -36,17 +28,6 @@
     --measure: 62ch;
   }
 
-
-  .panel-paper{
-    --bg: var(--paper);
-    --surface: var(--paper-surface);
-    --surface-2: var(--paper-surface-2);
-    --ink: var(--paper-ink);
-    --ink-soft: var(--paper-ink-soft);
-    --line: var(--paper-line);
-    background: var(--bg);
-    color: var(--ink);
-  }
 
   *,*::before,*::after{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
@@ -57,10 +38,7 @@
 
   body{
     margin: 0;
-    background-color: var(--bg);
-    background-image:
-      radial-gradient(circle, rgba(243,239,234,0.05) 1px, transparent 1px);
-    background-size: 26px 26px;
+    background: var(--bg);
     color: var(--ink);
     font-family: var(--font-body);
     font-size: 16px;
@@ -72,7 +50,6 @@
 
   a{ color: inherit; }
   h1,h2,h3{ font-family: var(--font-display); font-weight: 600; text-wrap: balance; margin: 0; }
-  h2{ font-family: var(--font-impact); font-weight: 400; text-transform: uppercase; letter-spacing: 0.01em; }
   p{ margin: 0; }
 
   .skip-link{
@@ -166,12 +143,6 @@
   }
   .rail-frame.is-active .num,
   .rail-frame.is-active .label{ color: var(--accent); }
-  .rail-frame.is-active::before{
-    content: "";
-    position: absolute; left: 0; top: 0.1em; bottom: 0.1em;
-    width: 3px;
-    background: var(--accent);
-  }
   .rail-frame:hover .num,
   .rail-frame:hover .label{ color: var(--ink); }
 
@@ -219,12 +190,6 @@
   }
   section:last-of-type{ border-bottom: none; }
 
-  .angle-divider{
-    height: 52px;
-    background: var(--accent);
-    clip-path: polygon(0 100%, 100% 0, 100% 100%);
-  }
-
   .section-head{
     display: flex;
     align-items: baseline;
@@ -257,54 +222,27 @@
     top: 50%;
     right: clamp(1rem, 4vw, 4rem);
     transform: translateY(-50%);
-    font-family: var(--font-impact);
-    font-weight: 400;
+    font-family: var(--font-mono);
+    font-weight: 500;
     font-size: clamp(6rem, 22vw, 20rem);
     line-height: 1;
-    color: var(--accent);
-    opacity: 0.16;
+    color: var(--ink-soft);
+    opacity: 0.14;
     font-variant-numeric: tabular-nums;
     pointer-events: none;
     z-index: 0;
   }
   .hero > *:not(.hero-framenum){ position: relative; z-index: 1; }
   @media (max-width: 860px){ .hero-framenum{ display: none; } }
-  .hero .deco-ring{
-    position: absolute; top: 5%; right: 3%;
-    width: clamp(140px, 20vw, 260px); height: clamp(140px, 20vw, 260px);
-    border-radius: 50%;
-    border: 2px solid var(--accent);
-    opacity: 0.55;
-    pointer-events: none;
-  }
-  .hero .deco-stripes{
-    position: absolute; top: 3%; right: 22%;
-    width: 120px; height: 64px;
-    background: repeating-linear-gradient(115deg, var(--accent) 0 6px, transparent 6px 15px);
-    opacity: 0.5;
-    transform: rotate(-6deg);
-    pointer-events: none;
-  }
-  .hero .deco-cross{
-    position: absolute; bottom: 9%; right: 7%;
-    font-family: var(--font-impact);
-    font-size: 2.6rem;
-    line-height: 1;
-    color: var(--accent);
-    opacity: 0.6;
-    pointer-events: none;
-  }
-  @media (max-width: 860px){ .deco-ring, .deco-stripes, .deco-cross{ display: none; } }
   .onion{
     position: relative;
     line-height: 0.98;
   }
   .onion .layer{
-    font-family: var(--font-impact);
-    font-weight: 400;
-    font-size: clamp(3rem, 10vw, 7.2rem);
-    letter-spacing: 0.01em;
-    text-transform: uppercase;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.6rem, 9vw, 6.4rem);
+    letter-spacing: -0.01em;
   }
   .onion .layer.top{ position: relative; color: var(--ink); z-index: 3; }
   .onion .layer.ghost{
@@ -330,21 +268,6 @@
     .onion .layer.ghost.g2{ transform: translate(-7px, -4px); }
   }
 
-  .hero-badges{ display: flex; gap: 0.8rem; flex-wrap: wrap; }
-  .hero-badge{
-    display: flex; align-items: center; justify-content: center;
-    width: 96px; height: 96px;
-    border-radius: 50%;
-    border: 2px solid var(--accent);
-    text-align: center;
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    color: var(--ink);
-    line-height: 1.2;
-    padding: 0.6em;
-  }
   .hero-role{
     font-family: var(--font-display);
     font-style: italic;
@@ -591,17 +514,11 @@
     align-items: stretch;
   }
   .testimonial-card{
-    position: relative;
+    border: 1px solid var(--line);
     padding: 1.6rem 1.7rem;
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
-  }
-  .scribble-frame{
-    position: absolute; inset: -10px;
-    width: calc(100% + 20px); height: calc(100% + 20px);
-    pointer-events: none;
-    color: var(--accent);
   }
   .testimonial-card .mark{
     font-family: var(--font-display);
@@ -666,15 +583,14 @@
     margin-top: 2rem;
   }
   .contact-card{
-    position: relative;
+    border: 1px solid var(--line);
     padding: 1.3rem 1.4rem;
     text-decoration: none;
     display: flex; flex-direction: column; gap: 0.4rem;
-    transition: transform 0.15s ease;
+    transition: border-color 0.15s ease, transform 0.15s ease;
     width: 100%;
   }
-  .contact-card:hover{ transform: translateY(-2px); }
-  .contact-card:hover .scribble-frame{ color: var(--ink); }
+  .contact-card:hover{ border-color: var(--accent); transform: translateY(-2px); }
   button.contact-card{
     background: none;
     font: inherit;
@@ -731,13 +647,6 @@
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <symbol id="scribbleRect" viewBox="0 0 300 200">
-      <path d="M9,14 C44,3 92,17 138,7 C186,-3 238,13 291,5 C297,42 287,78 293,116 C299,148 289,176 293,191 C242,199 188,185 148,193 C98,203 48,189 9,197 C3,158 13,118 5,88 C-1,58 11,28 9,14 Z" fill="none" stroke="currentColor" stroke-width="5"/>
-    </symbol>
-  </defs>
-</svg>
 <a class="skip-link" href="#about">Skip to content</a>
 
 <nav class="rail" aria-label="Reel navigation">
@@ -757,9 +666,6 @@
 <main>
   <section class="hero" id="hero">
     <span class="hero-framenum" aria-hidden="true">001</span>
-    <span class="deco-ring" aria-hidden="true"></span>
-    <span class="deco-stripes" aria-hidden="true"></span>
-    <span class="deco-cross" aria-hidden="true">&times;</span>
     <p class="eyebrow">Portfolio — 3D Generalist</p>
     <div class="onion">
       <span class="layer ghost g1">Maria Ivanova</span>
@@ -767,11 +673,6 @@
       <h1 class="layer top">Maria Ivanova</h1>
     </div>
     <p class="hero-role">Sculpting characters and creatures — now learning to make them move.</p>
-    <div class="hero-badges" aria-hidden="true">
-      <span class="hero-badge">Character<br/>Sculptor</span>
-      <span class="hero-badge">Creature<br/>Design</span>
-      <span class="hero-badge">Anim.<br/>Student</span>
-    </div>
     <p class="hero-sub">Data analyst by trade, animator by instinct. I sculpt, retopologize and texture characters and creatures, and I'm currently training in character animation at AnimSchool — building toward directing and animating stories of my own.</p>
     <div class="hero-cta">
       <a class="btn primary" href="https://www.artstation.com/ivamaxa" target="_blank" rel="noopener">View ArtStation ↗</a>
@@ -785,8 +686,6 @@
       <span>PLAYING</span>
     </div>
   </section>
-
-  <div class="angle-divider" aria-hidden="true"></div>
 
   <section id="about">
     <div class="section-head">
@@ -952,34 +851,28 @@
     </div>
   </section>
 
-  <div class="angle-divider" aria-hidden="true"></div>
-
-  <section id="testimonials" class="panel-paper">
+  <section id="testimonials">
     <div class="section-head">
       <h2>Notes From Clients</h2>
       <span class="frame-tag">FRAME 120 / 005s</span>
     </div>
     <div class="testimonials-grid">
       <div class="testimonial-card">
-        <svg class="scribble-frame" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true"><use href="#scribbleRect" xlink:href="#scribbleRect"></use></svg>
         <span class="mark" aria-hidden="true">&ldquo;</span>
         <p class="testimonial-quote">Came out absolutely perfect! Fast worker with excellent customer service. 10/10</p>
         <p class="testimonial-attr">— weloveyesu · Fiverr · ★★★★★</p>
       </div>
       <div class="testimonial-card">
-        <svg class="scribble-frame" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true"><use href="#scribbleRect" xlink:href="#scribbleRect"></use></svg>
         <span class="mark" aria-hidden="true">&ldquo;</span>
         <p class="testimonial-quote">She was very nice at me and she did what i wanted. Not only that but she put details into things that I didn't expect and I was fascinated. All the modifications I asked for were done in an incredible way and it seemed that the person who was asking for was me but with knowledge of 3D modeling. She understood EXACTLY what I wanted and did everything in a fairly short time with incredible quality.</p>
         <p class="testimonial-attr">— aylman97 · Fiverr · ★★★★★</p>
       </div>
       <div class="testimonial-card">
-        <svg class="scribble-frame" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true"><use href="#scribbleRect" xlink:href="#scribbleRect"></use></svg>
         <span class="mark" aria-hidden="true">&ldquo;</span>
         <p class="testimonial-quote">The seller was communicating perfectly. We discussed in more details and notified me that it would extend the original due date. I didn't mind and my gig came out perfectly.</p>
         <p class="testimonial-attr">— wraithxguy · Fiverr · ★★★★★</p>
       </div>
       <div class="testimonial-card">
-        <svg class="scribble-frame" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true"><use href="#scribbleRect" xlink:href="#scribbleRect"></use></svg>
         <span class="mark" aria-hidden="true">&ldquo;</span>
         <p class="testimonial-quote">Maria did an amazing job! She was easy to work with and provided excellent service.</p>
         <p class="testimonial-attr">— leeooo360dg · Fiverr · ★★★★★</p>
@@ -987,7 +880,7 @@
     </div>
   </section>
 
-  <section id="contact" class="panel-paper">
+  <section id="contact">
     <div class="section-head">
       <h2>Contact</h2>
       <span class="frame-tag">FRAME 144 / 006s</span>
@@ -995,23 +888,16 @@
     <p class="contact-lead">Open to internships and junior roles in animation — reach out any of these ways.</p>
     <div class="contact-grid">
       <button class="contact-card" type="button" id="emailCopy" data-email="plumbum.imm@gmail.com">
-        <svg class="scribble-frame" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true"><use href="#scribbleRect" xlink:href="#scribbleRect"></use></svg>
         <span class="k">Email — click to copy</span><span class="v">plumbum.imm@gmail.com</span>
       </button>
       <span class="copy-status" role="status" aria-live="polite" id="copyStatus"></span>
-      <a class="contact-card" href="https://www.artstation.com/ivamaxa" target="_blank" rel="noopener">
-        <svg class="scribble-frame" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true"><use href="#scribbleRect" xlink:href="#scribbleRect"></use></svg>
-        <span class="k">ArtStation</span><span class="v">artstation.com/ivamaxa</span></a>
-      <a class="contact-card" href="https://www.linkedin.com/in/maria-ivanova-60110b2a6/" target="_blank" rel="noopener">
-        <svg class="scribble-frame" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true"><use href="#scribbleRect" xlink:href="#scribbleRect"></use></svg>
-        <span class="k">LinkedIn</span><span class="v">Maria Ivanova</span></a>
-      <a class="contact-card" href="https://instagram.com/ivamaxa_art" target="_blank" rel="noopener">
-        <svg class="scribble-frame" viewBox="0 0 300 200" preserveAspectRatio="none" aria-hidden="true"><use href="#scribbleRect" xlink:href="#scribbleRect"></use></svg>
-        <span class="k">Instagram</span><span class="v">@ivamaxa_art</span></a>
+      <a class="contact-card" href="https://www.artstation.com/ivamaxa" target="_blank" rel="noopener"><span class="k">ArtStation</span><span class="v">artstation.com/ivamaxa</span></a>
+      <a class="contact-card" href="https://www.linkedin.com/in/maria-ivanova-60110b2a6/" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="v">Maria Ivanova</span></a>
+      <a class="contact-card" href="https://instagram.com/ivamaxa_art" target="_blank" rel="noopener"><span class="k">Instagram</span><span class="v">@ivamaxa_art</span></a>
     </div>
   </section>
 
-  <footer class="panel-paper">
+  <footer>
     <p class="footer-thanks">Thank you for your time!</p>
     <button class="btn primary heart-btn" id="heartBtn" type="button">Click Me</button>
     <div class="footer-meta">
