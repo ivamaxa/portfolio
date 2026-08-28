@@ -8,19 +8,20 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%AC%3C/text%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500;0,9..144,600&family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #E7E9EC;
-    --surface: #D9DCE0;
-    --surface-2: #C9CDD3;
-    --ink: #191C21;
-    --ink-soft: #5B6068;
-    --accent: #B08159;
-    --accent-ink: #191C21;
-    --line: #BEC3C9;
+    --bg: #17161B;
+    --surface: #201F26;
+    --surface-2: #2B2A33;
+    --ink: #F3EFEA;
+    --ink-soft: #948F9B;
+    --accent: #E3402C;
+    --accent-ink: #FCEEE8;
+    --line: #38363F;
 
     --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+    --font-impact: "Anton", "Archivo Black", Impact, sans-serif;
     --font-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
     --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
 
@@ -38,7 +39,10 @@
 
   body{
     margin: 0;
-    background: var(--bg);
+    background-color: var(--bg);
+    background-image:
+      radial-gradient(circle, rgba(243,239,234,0.05) 1px, transparent 1px);
+    background-size: 26px 26px;
     color: var(--ink);
     font-family: var(--font-body);
     font-size: 16px;
@@ -50,6 +54,7 @@
 
   a{ color: inherit; }
   h1,h2,h3{ font-family: var(--font-display); font-weight: 600; text-wrap: balance; margin: 0; }
+  h2{ font-family: var(--font-impact); font-weight: 400; text-transform: uppercase; letter-spacing: 0.01em; }
   p{ margin: 0; }
 
   .skip-link{
@@ -143,6 +148,12 @@
   }
   .rail-frame.is-active .num,
   .rail-frame.is-active .label{ color: var(--accent); }
+  .rail-frame.is-active::before{
+    content: "";
+    position: absolute; left: 0; top: 0.1em; bottom: 0.1em;
+    width: 3px;
+    background: var(--accent);
+  }
   .rail-frame:hover .num,
   .rail-frame:hover .label{ color: var(--ink); }
 
@@ -190,6 +201,12 @@
   }
   section:last-of-type{ border-bottom: none; }
 
+  .angle-divider{
+    height: 52px;
+    background: var(--accent);
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+  }
+
   .section-head{
     display: flex;
     align-items: baseline;
@@ -222,27 +239,54 @@
     top: 50%;
     right: clamp(1rem, 4vw, 4rem);
     transform: translateY(-50%);
-    font-family: var(--font-mono);
-    font-weight: 500;
+    font-family: var(--font-impact);
+    font-weight: 400;
     font-size: clamp(6rem, 22vw, 20rem);
     line-height: 1;
-    color: var(--ink-soft);
-    opacity: 0.14;
+    color: var(--accent);
+    opacity: 0.16;
     font-variant-numeric: tabular-nums;
     pointer-events: none;
     z-index: 0;
   }
   .hero > *:not(.hero-framenum){ position: relative; z-index: 1; }
   @media (max-width: 860px){ .hero-framenum{ display: none; } }
+  .hero .deco-ring{
+    position: absolute; top: 5%; right: 3%;
+    width: clamp(140px, 20vw, 260px); height: clamp(140px, 20vw, 260px);
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .hero .deco-stripes{
+    position: absolute; top: 3%; right: 22%;
+    width: 120px; height: 64px;
+    background: repeating-linear-gradient(115deg, var(--accent) 0 6px, transparent 6px 15px);
+    opacity: 0.5;
+    transform: rotate(-6deg);
+    pointer-events: none;
+  }
+  .hero .deco-cross{
+    position: absolute; bottom: 9%; right: 7%;
+    font-family: var(--font-impact);
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--accent);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  @media (max-width: 860px){ .deco-ring, .deco-stripes, .deco-cross{ display: none; } }
   .onion{
     position: relative;
     line-height: 0.98;
   }
   .onion .layer{
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: clamp(2.6rem, 9vw, 6.4rem);
-    letter-spacing: -0.01em;
+    font-family: var(--font-impact);
+    font-weight: 400;
+    font-size: clamp(3rem, 10vw, 7.2rem);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
   }
   .onion .layer.top{ position: relative; color: var(--ink); z-index: 3; }
   .onion .layer.ghost{
@@ -268,6 +312,21 @@
     .onion .layer.ghost.g2{ transform: translate(-7px, -4px); }
   }
 
+  .hero-badges{ display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  .hero-badge{
+    display: flex; align-items: center; justify-content: center;
+    width: 96px; height: 96px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--ink);
+    line-height: 1.2;
+    padding: 0.6em;
+  }
   .hero-role{
     font-family: var(--font-display);
     font-style: italic;
@@ -666,6 +725,9 @@
 <main>
   <section class="hero" id="hero">
     <span class="hero-framenum" aria-hidden="true">001</span>
+    <span class="deco-ring" aria-hidden="true"></span>
+    <span class="deco-stripes" aria-hidden="true"></span>
+    <span class="deco-cross" aria-hidden="true">&times;</span>
     <p class="eyebrow">Portfolio — 3D Generalist</p>
     <div class="onion">
       <span class="layer ghost g1">Maria Ivanova</span>
@@ -673,6 +735,11 @@
       <h1 class="layer top">Maria Ivanova</h1>
     </div>
     <p class="hero-role">Sculpting characters and creatures — now learning to make them move.</p>
+    <div class="hero-badges" aria-hidden="true">
+      <span class="hero-badge">Character<br/>Sculptor</span>
+      <span class="hero-badge">Creature<br/>Design</span>
+      <span class="hero-badge">Anim.<br/>Student</span>
+    </div>
     <p class="hero-sub">Data analyst by trade, animator by instinct. I sculpt, retopologize and texture characters and creatures, and I'm currently training in character animation at AnimSchool — building toward directing and animating stories of my own.</p>
     <div class="hero-cta">
       <a class="btn primary" href="https://www.artstation.com/ivamaxa" target="_blank" rel="noopener">View ArtStation ↗</a>
@@ -686,6 +753,8 @@
       <span>PLAYING</span>
     </div>
   </section>
+
+  <div class="angle-divider" aria-hidden="true"></div>
 
   <section id="about">
     <div class="section-head">
