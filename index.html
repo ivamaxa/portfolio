@@ -8,20 +8,29 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%AC%3C/text%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@400;500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #E7E9EC;
-    --surface: #D9DCE0;
-    --surface-2: #C9CDD3;
-    --ink: #191C21;
-    --ink-soft: #5B6068;
-    --accent: #B08159;
-    --accent-ink: #191C21;
-    --line: #BEC3C9;
+    --bg: #2B2A2E;
+    --surface: #201F23;
+    --surface-2: #34333A;
+    --ink: #F2EDE4;
+    --ink-soft: #ADA8AD;
+    --accent: #953B51;
+    --accent-ink: #F2EDE4;
+    --line: #403E44;
 
-    --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-    --font-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --paper: #F2EDE4;
+    --paper-surface: #E5DED2;
+    --paper-surface-2: #D8CFBF;
+    --paper-ink: #2B2A2E;
+    --paper-ink-soft: #837C79;
+    --paper-line: #CFC6B7;
+
+    --font-impact: "Archivo Black", "Arial Black", sans-serif;
+    --font-cond: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --font-display: "Barlow", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "Barlow", "Helvetica Neue", Arial, sans-serif;
     --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
 
     --rail-w: 132px;
@@ -38,7 +47,9 @@
 
   body{
     margin: 0;
-    background: var(--bg);
+    background-color: var(--bg);
+    background-image: radial-gradient(circle, rgba(242,237,228,0.05) 1px, transparent 1px);
+    background-size: 26px 26px;
     color: var(--ink);
     font-family: var(--font-body);
     font-size: 16px;
@@ -49,7 +60,7 @@
   a, button, video, .filmstrip-nav, button.contact-card, .filmstrip-item img { cursor: url("data:image/png;base64,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") 6 6, pointer; }
 
   a{ color: inherit; }
-  h1,h2,h3{ font-family: var(--font-display); font-weight: 600; text-wrap: balance; margin: 0; }
+  h1,h2,h3{ font-family: var(--font-impact); font-weight: 400; text-transform: uppercase; letter-spacing: 0.01em; text-wrap: balance; margin: 0; }
   p{ margin: 0; }
 
   .skip-link{
@@ -239,10 +250,11 @@
     line-height: 0.98;
   }
   .onion .layer{
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: clamp(2.6rem, 9vw, 6.4rem);
-    letter-spacing: -0.01em;
+    font-family: var(--font-impact);
+    font-weight: 400;
+    font-size: clamp(2.4rem, 8.4vw, 6.2rem);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
   }
   .onion .layer.top{ position: relative; color: var(--ink); z-index: 3; }
   .onion .layer.ghost{
@@ -269,9 +281,11 @@
   }
 
   .hero-role{
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 400;
+    font-family: var(--font-cond);
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 500;
     font-size: clamp(1.1rem, 2vw, 1.5rem);
     color: var(--ink-soft);
     max-width: 34ch;
@@ -644,6 +658,93 @@
     88%{ opacity: 1; }
     100%{ transform: translateY(110vh) rotate(var(--rot, 0deg)); opacity: 0; }
   }
+
+  /* ---------- Graphic layer ---------- */
+  .cond{ font-family: var(--font-cond); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  section{ position: relative; overflow: hidden; }
+  .sect-numeral{
+    position: absolute; right: clamp(0.5rem, 3vw, 3rem); top: -0.08em;
+    font-family: var(--font-impact); font-weight: 400;
+    font-size: clamp(5rem, 14vw, 12.5rem); line-height: 1;
+    color: var(--accent); opacity: 0.14;
+    font-variant-numeric: tabular-nums;
+    pointer-events: none; z-index: 0;
+  }
+  section > *:not(.sect-numeral):not(.deco){ position: relative; z-index: 1; }
+
+  /* decorative geometry */
+  .deco{ position: absolute; pointer-events: none; }
+  .hero .deco, section .deco{ z-index: 0; }
+  .deco-ring{ border-radius: 50%; border: 2px solid var(--accent); }
+  .deco-stripes{
+    border-top-left-radius: 999px;
+    background: repeating-linear-gradient(122deg, var(--accent) 0 7px, transparent 7px 17px);
+  }
+  .deco-blob{ border-radius: 50%; background: var(--accent); }
+  .deco-x{ color: var(--accent); }
+  .deco-x::before, .deco-x::after{
+    content: ""; position: absolute; left: 0; top: 50%;
+    width: 100%; height: 6px; background: currentColor; border-radius: 2px;
+  }
+  .deco-x::before{ transform: rotate(45deg); }
+  .deco-x::after{ transform: rotate(-45deg); }
+  @media (max-width: 860px){ .deco{ display: none; } }
+
+  /* tapered diagonal band */
+  .taper-band{
+    height: 74px;
+    background: var(--accent);
+    clip-path: polygon(0 44%, 100% 0, 100% 100%, 0 62%);
+  }
+  .taper-band.paper{ background: var(--paper); }
+  .taper-band.flip{ clip-path: polygon(0 0, 100% 44%, 100% 62%, 0 100%); }
+
+  /* cream panels */
+  .panel-paper{
+    --bg: var(--paper);
+    --surface: var(--paper-surface);
+    --surface-2: var(--paper-surface-2);
+    --ink: var(--paper-ink);
+    --ink-soft: var(--paper-ink-soft);
+    --line: var(--paper-line);
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  /* pill controls */
+  .btn{ border-radius: 999px; border-width: 2px; }
+  .tool-chip{ border-radius: 999px; border-color: var(--accent); }
+  .training-item .status-badge{ border-radius: 999px; background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .filmstrip-nav{ border-radius: 16px; border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+  .filmstrip-nav:hover{ background: var(--ink); border-color: var(--ink); color: var(--bg); }
+  .contact-card, .testimonial-card{ border-radius: 22px; border-color: var(--accent); }
+  .slate{ border-radius: 30px; background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .slate .k{ color: rgba(242,237,228,0.72); }
+  .slate .v, .slate .roll{ color: var(--accent-ink); }
+  .slate .roll::before{ background: var(--accent-ink); }
+
+  /* framed media: heavier bottom edge, like a cel window */
+  .filmstrip-item, .reel-video, .cel-frame{
+    border: 3px solid var(--accent);
+    border-bottom-width: 13px;
+    border-radius: 22px;
+  }
+  .filmstrip-item figcaption{ background: var(--bg); }
+  .lightbox-img{ border: 3px solid var(--accent); border-bottom-width: 13px; border-radius: 22px; }
+  .lightbox-nav, .lightbox-close{ border-radius: 999px; border-color: var(--accent); }
+
+  /* section heads */
+  .section-head h2{ font-size: clamp(1.9rem, 4vw, 3.1rem); }
+  .work-body h3{ font-size: clamp(1.3rem, 2.4vw, 2rem); }
+  .work-body .tag, .frame-tag, .reel-cap, .skill-row, .tools-label,
+  .slate .k, .slate .v, .contact-card .k, .testimonial-attr{
+    font-family: var(--font-cond); letter-spacing: 0.09em;
+  }
+  .training-item .school{ font-family: var(--font-impact); text-transform: uppercase; }
+  .contact-lead{ font-family: var(--font-cond); text-transform: uppercase; letter-spacing: 0.05em; font-size: 1.5rem; }
+  .footer-thanks{ font-family: var(--font-impact); font-style: normal; text-transform: uppercase; }
+  .testimonial-quote{ font-family: var(--font-display); font-style: normal; }
 </style>
 </head>
 <body>
@@ -666,6 +767,9 @@
 <main>
   <section class="hero" id="hero">
     <span class="hero-framenum" aria-hidden="true">001</span>
+    <span class="deco deco-ring" style="right: -70px; top: 12%; width: clamp(150px, 20vw, 290px); height: clamp(150px, 20vw, 290px); opacity: 0.8" aria-hidden="true"></span>
+    <span class="deco deco-stripes" style="right: 20%; top: 8%; width: 132px; height: 132px; opacity: 0.85" aria-hidden="true"></span>
+    <span class="deco deco-x" style="right: 9%; bottom: 22%; width: 66px; height: 66px" aria-hidden="true"></span>
     <p class="eyebrow">Portfolio — 3D Generalist</p>
     <div class="onion">
       <span class="layer ghost g1">Maria Ivanova</span>
@@ -687,7 +791,10 @@
     </div>
   </section>
 
+  <div class="taper-band" aria-hidden="true"></div>
+
   <section id="about">
+    <span class="sect-numeral" aria-hidden="true">024</span>
     <div class="section-head">
       <h2>About</h2>
       <span class="frame-tag">FRAME 024 / 001s</span>
@@ -720,6 +827,10 @@
   </section>
 
   <section id="production">
+    <span class="sect-numeral" aria-hidden="true">048</span>
+    <span class="deco deco-blob" style="right: 6%; top: 14%; width: 150px; height: 150px; opacity: 0.5" aria-hidden="true"></span>
+    <span class="deco deco-stripes" style="right: 11%; top: 20%; width: 118px; height: 118px" aria-hidden="true"></span>
+    <span class="deco deco-x" style="right: 7%; bottom: 16%; width: 54px; height: 54px" aria-hidden="true"></span>
     <div class="section-head">
       <h2>In Production</h2>
       <span class="frame-tag">FRAME 048 / 002s</span>
@@ -733,6 +844,8 @@
   </section>
 
   <section id="work">
+    <span class="sect-numeral" aria-hidden="true">072</span>
+    <span class="deco deco-blob" style="left: -118px; top: 42%; width: 160px; height: 160px; opacity: 0.85" aria-hidden="true"></span>
     <div class="section-head">
       <h2>Selected Work</h2>
       <span class="frame-tag">FRAME 072 / 003s</span>
@@ -820,6 +933,8 @@
   </section>
 
   <section id="training">
+    <span class="sect-numeral" aria-hidden="true">096</span>
+    <span class="deco deco-ring" style="right: -50px; bottom: 18%; width: 190px; height: 190px; opacity: 0.5" aria-hidden="true"></span>
     <div class="section-head">
       <h2>Training</h2>
       <span class="frame-tag">FRAME 096 / 004s</span>
@@ -851,7 +966,10 @@
     </div>
   </section>
 
-  <section id="testimonials">
+  <div class="taper-band paper flip" aria-hidden="true"></div>
+
+  <section id="testimonials" class="panel-paper">
+    <span class="sect-numeral" aria-hidden="true">120</span>
     <div class="section-head">
       <h2>Notes From Clients</h2>
       <span class="frame-tag">FRAME 120 / 005s</span>
@@ -880,7 +998,8 @@
     </div>
   </section>
 
-  <section id="contact">
+  <section id="contact" class="panel-paper">
+    <span class="sect-numeral" aria-hidden="true">144</span>
     <div class="section-head">
       <h2>Contact</h2>
       <span class="frame-tag">FRAME 144 / 006s</span>
@@ -897,7 +1016,7 @@
     </div>
   </section>
 
-  <footer>
+  <footer class="panel-paper">
     <p class="footer-thanks">Thank you for your time!</p>
     <button class="btn primary heart-btn" id="heartBtn" type="button">Click Me</button>
     <div class="footer-meta">
