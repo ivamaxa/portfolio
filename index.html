@@ -458,19 +458,16 @@
     min-width: 0;
     margin: 0;
     position: relative;
-    aspect-ratio: 3 / 2;
-    overflow: hidden;
-    border: 1px solid var(--line);
-    background: var(--surface-2);
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
   }
   @media (max-width: 700px){ .filmstrip-item{ flex: 0 0 165px; } }
-  .filmstrip-item img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+  .filmstrip-item img{ width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block; background: var(--surface-2); }
   .filmstrip-item figcaption{
-    position: absolute; left: 0; right: 0; bottom: 0;
-    background: var(--bg);
-    font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.05em;
+    font-family: var(--font-cond); font-size: 0.78rem; letter-spacing: 0.1em;
     text-transform: uppercase; color: var(--ink-soft);
-    padding: 0.35em 0.5em;
+    line-height: 1.3;
   }
 
   /* ---------- Lightbox ---------- */
@@ -682,6 +679,18 @@
   }
   .deco-blob{ border-radius: 50%; background: var(--accent); }
   .deco-x{ color: var(--accent); }
+  .deco-dots{
+    background-image: radial-gradient(circle, var(--accent) 1.9px, transparent 2px);
+    background-size: 15px 15px;
+    opacity: 0.55;
+  }
+  .deco-arc{
+    border: 2px solid var(--accent);
+    border-radius: 999px 999px 0 0;
+    border-bottom: none;
+  }
+  .deco-pill{ border-radius: 999px; background: var(--accent); }
+  .deco-outline{ border: 2px solid var(--accent); border-radius: 26px; }
   .deco-x::before, .deco-x::after{
     content: ""; position: absolute; left: 0; top: 50%;
     width: 100%; height: 6px; background: currentColor; border-radius: 2px;
@@ -690,14 +699,6 @@
   .deco-x::after{ transform: rotate(-45deg); }
   @media (max-width: 860px){ .deco{ display: none; } }
 
-  /* tapered diagonal band */
-  .taper-band{
-    height: clamp(96px, 13vw, 180px);
-    background: var(--paper);
-    clip-path: polygon(0 34%, 100% 0, 100% 74%, 0 100%);
-  }
-  .taper-band.paper{ background: var(--paper); }
-  .taper-band.flip{ clip-path: polygon(0 0, 100% 34%, 100% 100%, 0 74%); }
 
   /* cream panels */
   .panel-paper{
@@ -724,12 +725,11 @@
   .slate .roll::before{ background: var(--accent-ink); }
 
   /* framed media: heavier bottom edge, like a cel window */
-  .filmstrip-item, .reel-video, .cel-frame{
+  .filmstrip-item img, .reel-video, .cel-frame{
     border: 3px solid var(--accent);
     border-bottom-width: 13px;
     border-radius: 22px;
   }
-  .filmstrip-item figcaption{ background: var(--bg); }
   .lightbox-img{ border: 3px solid var(--accent); border-bottom-width: 13px; border-radius: 22px; }
   .lightbox-nav, .lightbox-close{ border-radius: 999px; border-color: var(--accent); }
 
@@ -787,10 +787,11 @@
     </div>
   </section>
 
-  <div class="taper-band" aria-hidden="true"></div>
-
   <section id="about">
     <span class="sect-numeral" aria-hidden="true">024</span>
+    <span class="deco deco-dots" style="left: -76px; bottom: 6%; width: 130px; height: 92px" aria-hidden="true"></span>
+    <span class="deco deco-arc" style="right: 15%; bottom: 12%; width: 96px; height: 48px; opacity: 0.7" aria-hidden="true"></span>
+    <span class="deco deco-x" style="right: 5%; top: 46%; width: 46px; height: 46px" aria-hidden="true"></span>
     <div class="section-head">
       <h2>About</h2>
       <span class="frame-tag">FRAME 024 / 001s</span>
@@ -824,9 +825,11 @@
 
   <section id="production">
     <span class="sect-numeral" aria-hidden="true">048</span>
-    <span class="deco deco-blob" style="right: 6%; top: 14%; width: 150px; height: 150px; opacity: 0.5" aria-hidden="true"></span>
-    <span class="deco deco-stripes" style="right: 11%; top: 20%; width: 118px; height: 118px" aria-hidden="true"></span>
-    <span class="deco deco-x" style="right: 7%; bottom: 16%; width: 54px; height: 54px" aria-hidden="true"></span>
+    <span class="deco deco-pill" style="left: -86px; bottom: 12%; width: 150px; height: 56px; opacity: 0.75" aria-hidden="true"></span>
+    <span class="deco deco-dots" style="right: 26%; bottom: 14%; width: 108px; height: 74px" aria-hidden="true"></span>
+    <span class="deco deco-blob" style="right: -78px; bottom: 8%; width: 150px; height: 150px; opacity: 0.5" aria-hidden="true"></span>
+    <span class="deco deco-stripes" style="right: 6%; bottom: 4%; width: 118px; height: 118px" aria-hidden="true"></span>
+    <span class="deco deco-x" style="right: 21%; bottom: 7%; width: 54px; height: 54px" aria-hidden="true"></span>
     <div class="section-head">
       <h2>In Production</h2>
       <span class="frame-tag">FRAME 048 / 002s</span>
@@ -841,7 +844,10 @@
 
   <section id="work">
     <span class="sect-numeral" aria-hidden="true">072</span>
-    <span class="deco deco-stripes" style="right: 5%; top: 7%; width: 124px; height: 124px; opacity: 0.85" aria-hidden="true"></span>
+    <span class="deco deco-x" style="right: 4%; top: 34%; width: 52px; height: 52px" aria-hidden="true"></span>
+    <span class="deco deco-outline" style="left: -74px; bottom: 10%; width: 112px; height: 78px; opacity: 0.6" aria-hidden="true"></span>
+    <span class="deco deco-ring" style="right: -60px; bottom: 26%; width: 170px; height: 170px; opacity: 0.4" aria-hidden="true"></span>
+    <span class="deco deco-stripes" style="right: -58px; bottom: 4%; width: 124px; height: 124px; opacity: 0.85" aria-hidden="true"></span>
     <span class="deco deco-blob" style="left: -118px; top: 42%; width: 160px; height: 160px; opacity: 0.85" aria-hidden="true"></span>
     <div class="section-head">
       <h2>Selected Work</h2>
@@ -931,8 +937,10 @@
 
   <section id="training">
     <span class="sect-numeral" aria-hidden="true">096</span>
+    <span class="deco deco-stripes" style="left: -78px; bottom: 20%; width: 116px; height: 116px; opacity: 0.7" aria-hidden="true"></span>
+    <span class="deco deco-dots" style="right: 22%; top: 12%; width: 120px; height: 80px" aria-hidden="true"></span>
     <span class="deco deco-x" style="right: 8%; top: 30%; width: 62px; height: 62px" aria-hidden="true"></span>
-    <span class="deco deco-ring" style="right: -50px; bottom: 18%; width: 190px; height: 190px; opacity: 0.5" aria-hidden="true"></span>
+    <span class="deco deco-ring" style="right: -130px; bottom: 22%; width: 190px; height: 190px; opacity: 0.5" aria-hidden="true"></span>
     <div class="section-head">
       <h2>Training</h2>
       <span class="frame-tag">FRAME 096 / 004s</span>
@@ -964,10 +972,11 @@
     </div>
   </section>
 
-  <div class="taper-band paper flip" aria-hidden="true"></div>
-
   <section id="testimonials">
     <span class="sect-numeral" aria-hidden="true">120</span>
+    <span class="deco deco-blob" style="left: -110px; top: 30%; width: 165px; height: 165px; opacity: 0.75" aria-hidden="true"></span>
+    <span class="deco deco-x" style="right: -34px; bottom: 8%; width: 50px; height: 50px" aria-hidden="true"></span>
+    <span class="deco deco-arc" style="left: 8%; bottom: 6%; width: 88px; height: 44px; opacity: 0.6" aria-hidden="true"></span>
     <div class="section-head">
       <h2>Notes From Clients</h2>
       <span class="frame-tag">FRAME 120 / 005s</span>
@@ -997,7 +1006,9 @@
   </section>
 
   <section id="contact">
-    <span class="deco deco-ring" style="right: -80px; top: 14%; width: clamp(160px, 18vw, 260px); height: clamp(160px, 18vw, 260px); opacity: 0.6" aria-hidden="true"></span>
+    <span class="deco deco-ring" style="right: -64px; bottom: -46px; width: 156px; height: 156px; opacity: 0.6" aria-hidden="true"></span>
+    <span class="deco deco-stripes" style="right: 17%; top: 10%; width: 110px; height: 110px; opacity: 0.75" aria-hidden="true"></span>
+    <span class="deco deco-dots" style="left: -80px; bottom: 10%; width: 126px; height: 88px" aria-hidden="true"></span>
     <span class="sect-numeral" aria-hidden="true">144</span>
     <div class="section-head">
       <h2>Contact</h2>
