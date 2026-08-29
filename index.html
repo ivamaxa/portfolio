@@ -717,6 +717,8 @@
   .tool-chip{ border-radius: 999px; border-color: var(--accent); }
   .training-item .status-badge{ border-radius: 999px; background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
   .filmstrip-nav{ border-radius: 16px; border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+  /* captioned strips are taller than their frames: keep the arrows frame-height */
+  .filmstrip-wrap:has(figcaption) .filmstrip-nav{ margin-bottom: 1.62rem; }
   .filmstrip-nav:hover{ background: var(--ink); border-color: var(--ink); color: var(--bg); }
   .contact-card, .testimonial-card{ border-radius: 22px; border-color: var(--accent); }
   .slate{ border-radius: 30px; background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
@@ -844,7 +846,6 @@
 
   <section id="work">
     <span class="sect-numeral" aria-hidden="true">072</span>
-    <span class="deco deco-x" style="right: 4%; top: 34%; width: 52px; height: 52px" aria-hidden="true"></span>
     <span class="deco deco-outline" style="left: -74px; bottom: 10%; width: 112px; height: 78px; opacity: 0.6" aria-hidden="true"></span>
     <span class="deco deco-ring" style="right: -60px; bottom: 26%; width: 170px; height: 170px; opacity: 0.4" aria-hidden="true"></span>
     <span class="deco deco-stripes" style="right: -58px; bottom: 4%; width: 124px; height: 124px; opacity: 0.85" aria-hidden="true"></span>
