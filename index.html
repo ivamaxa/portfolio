@@ -536,6 +536,14 @@
   .lightbox-nav:hover{ background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
   .lightbox-nav.prev{ left: clamp(0.6rem, 3vw, 2rem); }
   .lightbox-nav.next{ right: clamp(0.6rem, 3vw, 2rem); }
+  @media (max-width: 700px){
+    /* on a narrow screen centred arrows sit on top of the artwork */
+    .lightbox-nav{ top: auto; bottom: 14px; transform: none; width: 42px; height: 42px; }
+    .lightbox-nav.prev{ left: 12px; }
+    .lightbox-nav.next{ right: 12px; }
+    .lightbox-stage{ max-height: 78vh; }
+    .lightbox-hint{ bottom: 22px; }
+  }
 
   /* ---------- Testimonials ---------- */
   .testimonials-grid{
@@ -1114,9 +1122,7 @@
 <div class="lightbox" id="lightbox" aria-hidden="true">
   <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close">&times;</button>
   <button class="lightbox-nav prev" id="lightboxPrev" type="button" aria-label="Previous image">&#8249;</button>
-  <div class="lightbox-stage" id="lightboxStage">
-    <img class="lightbox-img" id="lightboxImg" src="" alt="">
-  </div>
+  <div class="lightbox-stage" id="lightboxStage"></div>
   <button class="lightbox-nav next" id="lightboxNext" type="button" aria-label="Next image">&#8250;</button>
   <span class="lightbox-hint" id="lightboxHint" aria-hidden="true">Scroll for more ↓</span>
 </div>
@@ -1133,100 +1139,85 @@
   var lightboxStage = document.getElementById('lightboxStage');
   var lightboxHint = document.getElementById('lightboxHint');
   var galleryStore = document.getElementById('galleries');
-  if (lightbox && lightboxImg && lightboxStage){
-    var currentImages = [];
+  if (lightbox && lightboxStage){
+    var currentItems = [];
     var currentIndex = 0;
-    var galleryMode = false;
+    var hintTimer = null;
 
-    function showCurrent(){
-      var img = currentImages[currentIndex];
-      if (!img) return;
-      lightboxImg.src = img.src;
-      lightboxImg.alt = img.alt;
+    // a project folder shows its whole set; a lone image shows just itself
+    function imagesFor(item){
+      var galId = item && item.dataset.gallery;
+      if (galId && galleryStore){
+        var source = galleryStore.querySelector('[data-gallery-id="' + galId + '"]');
+        if (source){
+          var found = Array.prototype.slice.call(source.querySelectorAll('img'));
+          if (found.length) return found;
+        }
+      }
+      var own = item && item.querySelector('img');
+      return own ? [own] : [];
     }
 
-    function setNavVisible(on){
-      lightboxPrev.style.display = on ? '' : 'none';
-      lightboxNext.style.display = on ? '' : 'none';
-    }
+    function render(){
+      var item = currentItems[currentIndex];
+      if (!item) return;
+      var imgs = imagesFor(item);
 
-    function resetStage(){
-      // keep the single-image node, drop any cloned gallery frames
-      Array.prototype.slice.call(lightboxStage.querySelectorAll('img')).forEach(function(n){
-        if (n !== lightboxImg) n.remove();
-      });
-      lightboxStage.classList.remove('is-gallery');
-      lightboxImg.style.display = '';
-      lightboxHint.classList.remove('is-shown');
-    }
-
-    function reveal(){
-      lightbox.classList.add('is-open');
-      lightbox.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-      lightboxStage.scrollTop = 0;
-    }
-
-    // a project cover opens its whole set, stacked to scroll through
-    function openGallery(galId){
-      var source = galleryStore && galleryStore.querySelector('[data-gallery-id="' + galId + '"]');
-      if (!source) return false;
-      var imgs = Array.prototype.slice.call(source.querySelectorAll('img'));
-      if (!imgs.length) return false;
-
-      resetStage();
-      galleryMode = true;
-      currentImages = [];
-      lightboxImg.style.display = 'none';
-      lightboxStage.classList.add('is-gallery');
+      lightboxStage.innerHTML = '';
       imgs.forEach(function(src){
-        var clone = document.createElement('img');
-        clone.className = 'lightbox-img';
-        clone.src = src.src;
-        clone.alt = src.alt;
-        lightboxStage.appendChild(clone);
+        var node = document.createElement('img');
+        node.className = 'lightbox-img';
+        node.src = src.src;
+        node.alt = src.alt;
+        lightboxStage.appendChild(node);
       });
-      setNavVisible(false);
-      reveal();
+      lightboxStage.classList.toggle('is-gallery', imgs.length > 1);
+      lightboxStage.scrollTop = 0;
+
+      window.clearTimeout(hintTimer);
       if (imgs.length > 1){
         lightboxHint.classList.add('is-shown');
-        window.setTimeout(function(){ lightboxHint.classList.remove('is-shown'); }, 2600);
+        hintTimer = window.setTimeout(function(){ lightboxHint.classList.remove('is-shown'); }, 2600);
+      } else {
+        lightboxHint.classList.remove('is-shown');
       }
-      return true;
     }
 
     function openLightbox(img){
       var item = img.closest('.filmstrip-item');
-      var galId = item && item.dataset.gallery;
-      if (galId && openGallery(galId)) return;
-
-      resetStage();
-      galleryMode = false;
       var track = img.closest('.filmstrip');
-      currentImages = track ? Array.prototype.slice.call(track.querySelectorAll('.filmstrip-item img')) : [img];
-      currentIndex = Math.max(0, currentImages.indexOf(img));
-      showCurrent();
-      setNavVisible(currentImages.length > 1);
-      reveal();
+      currentItems = track ? Array.prototype.slice.call(track.querySelectorAll('.filmstrip-item')) : [item];
+      currentIndex = Math.max(0, currentItems.indexOf(item));
+
+      var pageable = currentItems.length > 1;
+      lightboxPrev.style.display = pageable ? '' : 'none';
+      lightboxNext.style.display = pageable ? '' : 'none';
+
+      render();
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeLightbox(){
       lightbox.classList.remove('is-open');
       lightbox.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
-      lightboxImg.src = '';
-      resetStage();
-      galleryMode = false;
+      window.clearTimeout(hintTimer);
+      lightboxHint.classList.remove('is-shown');
+      lightboxStage.innerHTML = '';
+      lightboxStage.classList.remove('is-gallery');
     }
+
     function showNext(){
-      if (galleryMode || !currentImages.length) return;
-      currentIndex = (currentIndex + 1) % currentImages.length;
-      showCurrent();
+      if (currentItems.length < 2) return;
+      currentIndex = (currentIndex + 1) % currentItems.length;
+      render();
     }
     function showPrev(){
-      if (galleryMode || !currentImages.length) return;
-      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-      showCurrent();
+      if (currentItems.length < 2) return;
+      currentIndex = (currentIndex - 1 + currentItems.length) % currentItems.length;
+      render();
     }
 
     Array.prototype.slice.call(document.querySelectorAll('.filmstrip-item img')).forEach(function(img){
